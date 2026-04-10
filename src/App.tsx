@@ -26,21 +26,14 @@ const getCategoryIcon = (iconName: string) => {
 };
 
 const sanitizeUnsplashUrl = (url: string) => {
-  if (!url || !url.includes('unsplash.com')) return url;
-  
-  try {
-    const urlObj = new URL(url);
-    // If it's a photo page URL like unsplash.com/photos/abc-123
-    if (urlObj.hostname.includes('unsplash.com') && urlObj.pathname.includes('/photos/')) {
-      const parts = urlObj.pathname.split('/');
-      const photoId = parts[parts.length - 1];
-      if (photoId) {
-        return `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&q=80&w=600`;
-      }
-    }
-  } catch (e) {
-    // Fall back to original if URL parsing fails
+  if (!url) return url;
+
+  // If it's a direct Unsplash CDN link, ensure it has optimization params
+  if (url.includes('images.unsplash.com')) {
+    const baseUrl = url.split('?')[0];
+    return `${baseUrl}?auto=format&fit=crop&q=80&w=600`;
   }
+
   return url;
 };
 
@@ -1050,13 +1043,32 @@ const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">OR PASTE URL</span>
                 <div className="h-px grow bg-gray-200"></div>
               </div>
-              <input 
-                type="url" 
-                value={imageUrl} 
-                onChange={e => setImageUrl(sanitizeUnsplashUrl(e.target.value))}
-                className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
-                placeholder="https://images.unsplash.com/..."
-              />
+              <div className="flex gap-2">
+                <input 
+                  type="text"
+                  value={imageUrl} 
+                  onChange={e => setImageUrl(sanitizeUnsplashUrl(e.target.value))}
+                  onPaste={e => {
+                    e.preventDefault();
+                    const pasted = e.clipboardData.getData('text');
+                    setImageUrl(sanitizeUnsplashUrl(pasted));
+                  }}
+                  className="flex-1 border rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+                  placeholder="Paste direct image address..."
+                />
+                <button
+                  type="button"
+                  onClick={() => window.open(`https://unsplash.com/s/photos/${encodeURIComponent(name || 'product')}`, '_blank')}
+                  className="px-3 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors flex items-center gap-1 text-xs font-bold"
+                  title="Search Unsplash"
+                >
+                  <Search size={14} />
+                  Find
+                </button>
+              </div>
+              <p className="mt-2 text-[10px] text-gray-500 leading-relaxed px-1">
+                <span className="text-emerald-600 font-bold">Pro Tip:</span> On Unsplash, <span className="underline italic">Right-Click</span> the image and select <span className="font-bold">"Copy image address"</span> for the best results.
+              </p>
             </div>
 
             {imageUrl && imageUrl !== 'IMAGE:placeholder' && (
@@ -1065,14 +1077,28 @@ const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void
                   src={imageUrl} 
                   alt="Preview" 
                   className="w-full h-full object-cover"
+                  crossOrigin="anonymous"
                   referrerPolicy="no-referrer"
+                  onError={e => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
                 />
-                <button 
-                  onClick={() => setImageUrl('')}
-                  className="absolute top-2 right-2 bg-black/50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <X size={14} />
-                </button>
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                  <button 
+                    type="button"
+                    onClick={() => window.open(imageUrl, '_blank')}
+                    className="p-2 bg-white rounded-full text-gray-800 hover:bg-gray-100 transition-colors"
+                    title="View Full Size"
+                  >
+                    <Search size={16} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => setImageUrl('')}
+                    className="p-2 bg-white rounded-full text-rose-600 hover:bg-rose-50 transition-colors"
+                    title="Remove Image"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
             )}
           </div>
