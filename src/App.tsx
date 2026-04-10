@@ -1811,7 +1811,7 @@ const AdminScreen = () => {
 
 
   return (
-    <div className="pb-24 p-4 max-w-4xl mx-auto relative min-h-screen">
+    <div className="pb-32 p-4 max-w-4xl mx-auto relative min-h-screen">
       <div className="mb-6 flex flex-col gap-4">
         <div className="flex justify-between items-end">
           <div>
@@ -1888,7 +1888,7 @@ const AdminScreen = () => {
                       title="Edit Product"
                     >
                       <Pencil size={18} />
-                      <span className="text-[10px] font-bold sm:hidden">Edit</span>
+                      <span className="text-[10px] font-bold hidden sm:inline">Edit</span>
                     </button>
                     <button 
                       onClick={() => setProductToDelete(product)}
@@ -1896,7 +1896,7 @@ const AdminScreen = () => {
                       title="Delete Product"
                     >
                       <Trash2 size={18} />
-                      <span className="text-[10px] font-bold sm:hidden">Delete</span>
+                      <span className="text-[10px] font-bold hidden sm:inline">Delete</span>
                     </button>
                   </div>
                 </div>
@@ -1906,7 +1906,7 @@ const AdminScreen = () => {
           
           <button 
             onClick={() => { setEditingProduct(undefined); setIsModalOpen(true); }}
-            className="fixed bottom-24 right-6 w-14 h-14 bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-700 transition-colors z-10"
+            className="fixed bottom-28 right-6 w-14 h-14 bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-emerald-700 transition-colors z-10"
           >
             <Plus size={28} />
           </button>
