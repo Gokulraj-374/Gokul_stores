@@ -271,8 +271,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const addToCart = (product: Product, quantity: number = 1) => {
+    // Inventory check
+    if (product.stock <= 0) {
+      showToast('Sorry, this item is out of stock', 'error');
+      return;
+    }
+
     setCartItems(prev => {
       const existing = prev.find(p => p.id === product.id);
+      const currentQuantity = existing ? existing.quantity : 0;
+      
+      if (currentQuantity + quantity > product.stock) {
+        showToast(`Only ${product.stock} units available in stock`, 'info');
+        return prev;
+      }
+
       if (existing) {
         return prev.map(p => p.id === product.id ? { ...p, quantity: p.quantity + quantity } : p);
       }
@@ -318,8 +331,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'placed',
       date: new Date().toISOString()
     };
-    await setDoc(doc(db, 'orders', newOrder.id), newOrder);
-    setCartItems([]);
+    
+    try {
+      // 1. Create the order
+      await setDoc(doc(db, 'orders', newOrder.id), newOrder);
+      
+      // 2. Decrement stock for each item
+      for (const item of cartItems) {
+        const productRef = doc(db, 'products', item.id);
+        const newStock = Math.max(0, item.stock - item.quantity);
+        await updateDoc(productRef, { 
+          stock: newStock,
+          in_stock: newStock > 0 
+        });
+      }
+
+      setCartItems([]);
+      showToast('Order placed successfully!', 'success');
+    } catch (error) {
+      console.error("Order placement failed:", error);
+      showToast('Failed to place order. Please try again.', 'error');
+    }
   };
 
   const rateProduct = async (productId: string, rating: number) => {

@@ -11,8 +11,9 @@ export interface Product {
   category_id: string;
   category_name: string;
   image_url: string;
-  quantity?: number;
-  in_stock?: boolean;
+  quantity?: number; // Used for shopping cart
+  stock: number;    // Used for inventory
+  in_stock: boolean;
   reviews?: Review[];
 }
 

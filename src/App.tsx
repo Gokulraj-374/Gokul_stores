@@ -902,6 +902,7 @@ const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void
   const [price, setPrice] = useState(initialProduct?.price.toString() || '');
   const [categoryId, setCategoryId] = useState(initialProduct?.category_id || categories[0]?.id || '');
   const [imageUrl, setImageUrl] = useState(initialProduct?.image_url === 'IMAGE:placeholder' ? '' : (initialProduct?.image_url || ''));
+  const [stock, setStock] = useState(initialProduct?.stock.toString() || '0');
   const [inStock, setInStock] = useState(initialProduct?.in_stock !== false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -931,6 +932,7 @@ const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void
       id: initialProduct?.id || Date.now().toString(),
       name,
       price: parseInt(price, 10),
+      stock: parseInt(stock, 10),
       category_id: categoryId,
       category_name: categories.find(c => c.id === categoryId)?.name || '',
       image_url: imageUrl || 'IMAGE:placeholder',
@@ -970,6 +972,24 @@ const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void
               onChange={e => setPrice(e.target.value)}
               className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 outline-none"
               placeholder="Enter price"
+              required
+              min="0"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-1">Stock Quantity</label>
+            <input 
+              type="number" 
+              value={stock} 
+              onChange={e => {
+                const val = e.target.value;
+                setStock(val);
+                if (parseInt(val, 10) > 0) setInStock(true);
+                else if (parseInt(val, 10) === 0) setInStock(false);
+              }}
+              className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-emerald-500 outline-none"
+              placeholder="Enter current stock"
               required
               min="0"
             />
@@ -1898,8 +1918,12 @@ const AdminScreen = () => {
                 <div className="grow min-w-[120px]">
                   <div className="flex flex-wrap items-center gap-2">
                     <h4 className="font-bold text-gray-900 line-clamp-1">{product.name}</h4>
-                    {product.in_stock === false && (
-                      <span className="text-[7px] sm:text-[8px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded font-black uppercase tracking-widest border border-rose-200">Out of Stock</span>
+                    {product.stock <= 0 ? (
+                      <span className="text-[7px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded font-black uppercase tracking-widest border border-rose-200">Out of Stock</span>
+                    ) : product.stock < 5 ? (
+                      <span className="text-[7px] bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded font-black uppercase tracking-widest border border-amber-200">Low Stock: {product.stock}</span>
+                    ) : (
+                      <span className="text-[7px] bg-emerald-100 text-emerald-600 px-1.5 py-0.5 rounded font-black uppercase tracking-widest border border-emerald-200">{product.stock} in stock</span>
                     )}
                   </div>
                   <p className="text-xs sm:text-sm text-gray-500">{category?.name || 'Unknown'}</p>
