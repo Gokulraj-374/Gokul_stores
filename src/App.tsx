@@ -9,9 +9,11 @@ import {
   ShoppingBasket, GlassWater, Cookie, Search, 
   ClipboardList, Calendar, Star, Pencil, Sparkles, Share2,
   User as UserIcon, LogOut, LogIn, Loader2, Mail, Lock, Eye, EyeOff,
-  CheckCircle, AlertCircle, Heart, WifiOff
+  CheckCircle, AlertCircle, Heart, WifiOff, FileDown
 } from 'lucide-react';
 import { Product } from './types';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 
 const getCategoryIcon = (iconName: string) => {
@@ -1830,6 +1832,95 @@ const AdminScreen = () => {
     }
   };
 
+  const generateInventoryPDF = () => {
+    const doc = new jsPDF();
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+    // --- Header ---
+    doc.setFillColor(5, 150, 105); // emerald-600
+    doc.rect(0, 0, 210, 32, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text(storeSettings.storeName, 14, 14);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Inventory Report', 14, 22);
+    doc.text(`Generated: ${dateStr} at ${timeStr}`, 14, 28);
+
+    // --- Summary Stats ---
+    const totalProducts = products.length;
+    const outOfStock = products.filter(p => (p.stock ?? 0) <= 0).length;
+    const lowStock = products.filter(p => (p.stock ?? 0) > 0 && (p.stock ?? 0) < 5).length;
+    const inStock = totalProducts - outOfStock - lowStock;
+    const totalStockValue = products.reduce((acc, p) => acc + (p.price * (p.stock ?? 0)), 0);
+
+    doc.setTextColor(17, 24, 39); // gray-900
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Summary', 14, 42);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Total Products: ${totalProducts}`, 14, 50);
+    doc.text(`In Stock: ${inStock}`, 14, 56);
+    doc.text(`Low Stock (< 5): ${lowStock}`, 80, 50);
+    doc.text(`Out of Stock: ${outOfStock}`, 80, 56);
+    doc.text(`Total Inventory Value: \u20B9${totalStockValue.toLocaleString('en-IN')}`, 14, 62);
+
+    // --- Table ---
+    const tableRows = products.map((p, i) => {
+      const stock = p.stock ?? 0;
+      const status = stock <= 0 ? 'Out of Stock' : stock < 5 ? `Low (${stock})` : `${stock}`;
+      return [(i + 1).toString(), p.name, p.category_name, `\u20B9${p.price}`, status];
+    });
+
+    autoTable(doc, {
+      startY: 70,
+      head: [['#', 'Product Name', 'Category', 'Price', 'Stock']],
+      body: tableRows,
+      theme: 'grid',
+      headStyles: { fillColor: [5, 150, 105], textColor: 255, fontStyle: 'bold', fontSize: 9 },
+      bodyStyles: { fontSize: 8, textColor: [17, 24, 39] },
+      alternateRowStyles: { fillColor: [240, 253, 244] },
+      columnStyles: {
+        0: { cellWidth: 10, halign: 'center' },
+        1: { cellWidth: 'auto' },
+        2: { cellWidth: 35 },
+        3: { cellWidth: 22, halign: 'right' },
+        4: { cellWidth: 30, halign: 'center' },
+      },
+      didDrawCell: (data) => {
+        // Color the Stock column by status
+        if (data.section === 'body' && data.column.index === 4) {
+          const val = String(data.cell.raw);
+          if (val === 'Out of Stock') {
+            doc.setTextColor(220, 38, 38); // red
+          } else if (val.startsWith('Low')) {
+            doc.setTextColor(217, 119, 6); // amber
+          } else {
+            doc.setTextColor(5, 150, 105); // green
+          }
+        }
+      }
+    });
+
+    // --- Footer ---
+    const pageCount = (doc as any).internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(107, 114, 128);
+      doc.text(`${storeSettings.storeName} | Confidential`, 14, 290);
+      doc.text(`Page ${i} of ${pageCount}`, 196, 290, { align: 'right' });
+    }
+
+    const filename = `inventory_${now.toISOString().slice(0, 10)}.pdf`;
+    doc.save(filename);
+    showToast('Inventory PDF downloaded!', 'success');
+  };
+
   // Debug logging
   console.log("AdminScreen Render:");
   console.log("  User:", user ? { email: user.email, uid: user.uid } : null);
@@ -1864,7 +1955,14 @@ const AdminScreen = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-1">Admin Dashboard v5</h2>
             <p className="text-gray-500">Manage your store and orders</p>
           </div>
-           <div className="flex gap-2">
+           <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={generateInventoryPDF}
+              className="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-200 transition-colors flex items-center gap-1"
+              title="Download Inventory PDF Report"
+            >
+              <FileDown size={16} /> Export PDF
+            </button>
             <button
               onClick={() => fixMissingImages()}
               className="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-emerald-200 transition-colors flex items-center gap-1"
