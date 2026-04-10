@@ -899,10 +899,10 @@ const ContactScreen = () => {
 const ProductModal = ({ onClose, onSave, initialProduct }: { onClose: () => void, onSave: (p: Product) => void, initialProduct?: Product }) => {
   const { categories, showToast, uploadProductPhoto } = useAppStore();
   const [name, setName] = useState(initialProduct?.name || '');
-  const [price, setPrice] = useState(initialProduct?.price.toString() || '');
+  const [price, setPrice] = useState(initialProduct?.price?.toString() || '');
   const [categoryId, setCategoryId] = useState(initialProduct?.category_id || categories[0]?.id || '');
   const [imageUrl, setImageUrl] = useState(initialProduct?.image_url === 'IMAGE:placeholder' ? '' : (initialProduct?.image_url || ''));
-  const [stock, setStock] = useState(initialProduct?.stock.toString() || '0');
+  const [stock, setStock] = useState(initialProduct?.stock?.toString() || '0');
   const [inStock, setInStock] = useState(initialProduct?.in_stock !== false);
   const [isUploading, setIsUploading] = useState(false);
 
