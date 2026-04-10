@@ -1,0 +1,108 @@
+import { Category, Product } from './types';
+
+export const categories: Category[] = [
+  { id: '1', name: 'Snacks', icon: 'Cookie' },
+  { id: '3', name: 'Groceries', icon: 'ShoppingBasket' },
+  { id: '4', name: 'Drinks', icon: 'CupSoda' },
+  { id: '5', name: 'Vegetables', icon: 'Leaf' },
+];
+
+const IMAGES = {
+  // Snacks
+  lays_classic: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&q=80&w=600',
+  lays_masala: 'https://images.unsplash.com/photo-1621447509374-f20387401c9b?auto=format&fit=crop&q=80&w=600',
+  kurkure: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=600',
+  haldiram_mixture: 'https://images.unsplash.com/photo-1626082896492-766af4eb6501?auto=format&fit=crop&q=80&w=600',
+  marie_gold: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80&w=600',
+  oreo: 'https://images.unsplash.com/photo-1540331031772-bf933c077d71?auto=format&fit=crop&q=80&w=600',
+  parle_g: 'https://images.unsplash.com/photo-1622728448386-896865668d27?auto=format&fit=crop&q=80&w=600',
+  dairy_milk: 'https://images.unsplash.com/photo-1610450942365-53894451731d?auto=format&fit=crop&q=80&w=600',
+  kit_kat: 'https://images.unsplash.com/photo-1517060195029-e8853622ee89?auto=format&fit=crop&q=80&w=600',
+  munch: 'https://images.unsplash.com/photo-1526344966-89049886b28d?auto=format&fit=crop&q=80&w=600',
+
+  // Groceries
+  rice_raw: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600',
+  rice_basmati: 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&q=80&w=600',
+  wheat_flour: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600',
+  toor_dal: 'https://images.unsplash.com/photo-1585933228913-da9895006d6b?auto=format&fit=crop&q=80&w=600',
+  urad_dal: 'https://images.unsplash.com/photo-1505253308343-7f2a12130635?auto=format&fit=crop&q=80&w=600',
+  sugar: 'https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=600',
+  salt: 'https://images.unsplash.com/photo-1518110903958-ed4fc9211c2f?auto=format&fit=crop&q=80&w=600',
+  oil: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600',
+  ghee: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80&w=600',
+  turmeric: 'https://images.unsplash.com/photo-1615485499763-71887e1f4ede?auto=format&fit=crop&q=80&w=600',
+  chilli_powder: 'https://images.unsplash.com/photo-1599940824399-b87987cb36a5?auto=format&fit=crop&q=80&w=600',
+
+  // Drinks
+  cola: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600',
+  pepsi: 'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?auto=format&fit=crop&q=80&w=600',
+  sprite: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&q=80&w=600',
+  maaza: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=600',
+  tropicana: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&q=80&w=600',
+  red_bull: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&q=80&w=600',
+  sting: 'https://images.unsplash.com/photo-1531390650125-9f5b66d7cc8c?auto=format&fit=crop&q=80&w=600',
+  milk: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600',
+  water: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&q=80&w=600',
+  coconut: 'https://images.unsplash.com/photo-1526344966-89049886b28d?auto=format&fit=crop&q=80&w=600',
+
+  // Vegetables
+  potato: 'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?auto=format&fit=crop&q=80&w=600',
+  tomato: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600',
+  onion: 'https://images.unsplash.com/photo-1580201092675-a0bcbc10438a?auto=format&fit=crop&q=80&w=600',
+  carrot: 'https://images.unsplash.com/photo-1444731964746-611030d42e52?auto=format&fit=crop&q=80&w=600',
+  spinach: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&q=80&w=600',
+  garlic: 'https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&q=80&w=600',
+  ginger: 'https://images.unsplash.com/photo-1599940824399-b87987cb36a5?auto=format&fit=crop&q=80&w=600',
+  green_chilli: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&q=80&w=600'
+};
+
+export const initialProducts: Product[] = [
+  // Snacks
+  { id: 's1', name: 'Lays Classic', price: 20, category_id: '1', category_name: 'Snacks', image_url: IMAGES.lays_classic },
+  { id: 's2', name: 'Lays Magic Masala', price: 20, category_id: '1', category_name: 'Snacks', image_url: IMAGES.lays_masala },
+  { id: 's3', name: 'Lays Cream & Onion', price: 20, category_id: '1', category_name: 'Snacks', image_url: IMAGES.lays_classic },
+  { id: 's4', name: 'Kurkure Masala', price: 15, category_id: '1', category_name: 'Snacks', image_url: IMAGES.kurkure },
+  { id: 's9', name: 'Haldiram Mixture', price: 45, category_id: '1', category_name: 'Snacks', image_url: IMAGES.haldiram_mixture },
+  { id: 's16', name: 'Marie Gold', price: 25, category_id: '1', category_name: 'Snacks', image_url: IMAGES.marie_gold },
+  { id: 's18', name: 'Oreo Biscuit', price: 35, category_id: '1', category_name: 'Snacks', image_url: IMAGES.oreo },
+  { id: 's24', name: 'Parle-G', price: 10, category_id: '1', category_name: 'Snacks', image_url: IMAGES.parle_g },
+  { id: 's38', name: 'Dairy Milk Silk', price: 80, category_id: '1', category_name: 'Snacks', image_url: IMAGES.dairy_milk },
+  { id: 's41', name: 'KitKat', price: 30, category_id: '1', category_name: 'Snacks', image_url: IMAGES.kit_kat },
+  { id: 's42', name: 'Munch', price: 10, category_id: '1', category_name: 'Snacks', image_url: IMAGES.munch },
+
+  // Groceries
+  { id: 'g1', name: 'Raw Rice 1kg', price: 60, category_id: '3', category_name: 'Groceries', image_url: IMAGES.rice_raw },
+  { id: 'g3', name: 'Basmati Rice 1kg', price: 120, category_id: '3', category_name: 'Groceries', image_url: IMAGES.rice_basmati },
+  { id: 'g6', name: 'Wheat Flour 1kg', price: 55, category_id: '3', category_name: 'Groceries', image_url: IMAGES.wheat_flour },
+  { id: 'g14', name: 'Toor Dal 500g', price: 90, category_id: '3', category_name: 'Groceries', image_url: IMAGES.toor_dal },
+  { id: 'g15', name: 'Urad Dal 500g', price: 85, category_id: '3', category_name: 'Groceries', image_url: IMAGES.urad_dal },
+  { id: 'g25', name: 'Sugar 1kg', price: 45, category_id: '3', category_name: 'Groceries', image_url: IMAGES.sugar },
+  { id: 'g27', name: 'Salt 1kg', price: 20, category_id: '3', category_name: 'Groceries', image_url: IMAGES.salt },
+  { id: 'g29', name: 'Sunflower Oil 1L', price: 140, category_id: '3', category_name: 'Groceries', image_url: IMAGES.oil },
+  { id: 'g34', name: 'Pure Ghee 200ml', price: 210, category_id: '3', category_name: 'Groceries', image_url: IMAGES.ghee },
+  { id: 'g37', name: 'Turmeric Powder 100g', price: 35, category_id: '3', category_name: 'Groceries', image_url: IMAGES.turmeric },
+  { id: 'g38', name: 'Chilli Powder 100g', price: 40, category_id: '3', category_name: 'Groceries', image_url: IMAGES.chilli_powder },
+
+  // Drinks
+  { id: 'd1', name: 'Coca Cola 750ml', price: 45, category_id: '4', category_name: 'Drinks', image_url: IMAGES.cola },
+  { id: 'd4', name: 'Pepsi 750ml', price: 45, category_id: '4', category_name: 'Drinks', image_url: IMAGES.pepsi },
+  { id: 'd7', name: 'Sprite 750ml', price: 45, category_id: '4', category_name: 'Drinks', image_url: IMAGES.sprite },
+  { id: 'd21', name: 'Maaza 1.2L', price: 85, category_id: '4', category_name: 'Drinks', image_url: IMAGES.maaza },
+  { id: 'd25', name: 'Tropicana Apple 1L', price: 110, category_id: '4', category_name: 'Drinks', image_url: IMAGES.tropicana },
+  { id: 'd41', name: 'Red Bull 250ml', price: 115, category_id: '4', category_name: 'Drinks', image_url: IMAGES.red_bull },
+  { id: 'd45', name: 'Sting Energy 250ml', price: 20, category_id: '4', category_name: 'Drinks', image_url: IMAGES.sting },
+  { id: 'd54', name: 'Fresh Milk 500ml', price: 28, category_id: '4', category_name: 'Drinks', image_url: IMAGES.milk },
+  { id: 'd71', name: 'Mineral Water 1L', price: 20, category_id: '4', category_name: 'Drinks', image_url: IMAGES.water },
+  { id: 'd91', name: 'Tender Coconut', price: 50, category_id: '4', category_name: 'Drinks', image_url: IMAGES.coconut },
+
+  // Vegetables
+  { id: 'v1', name: 'Potato 1kg', price: 45, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.potato },
+  { id: 'v2', name: 'Tomato 1kg', price: 30, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.tomato },
+  { id: 'v3', name: 'Onion 1kg', price: 40, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.onion },
+  { id: 'v4', name: 'Carrot 500g', price: 35, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.carrot },
+  { id: 'v5', name: 'Fresh Spinach', price: 15, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.spinach },
+  { id: 'v6', name: 'Garlic 200g', price: 40, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.garlic },
+  { id: 'v7', name: 'Ginger 200g', price: 30, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.ginger },
+  { id: 'v8', name: 'Green Chilli 100g', price: 15, category_id: '5', category_name: 'Vegetables', image_url: IMAGES.green_chilli }
+];
+

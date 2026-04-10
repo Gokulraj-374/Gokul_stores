@@ -1,0 +1,309 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║                    🚀 INSTALLATION GUIDE - STEP BY STEP                  ║
+║                                                                           ║
+║                         GOKUL STORES MOBILE APP                         ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+⏱️  TOTAL TIME: ~5 MINUTES
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 1: PREPARE YOUR PHONE (2 MINUTES)
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 1️⃣ : Enable Developer Options
+──────────────────────────────────
+
+1. Open Settings app on your phone
+2. Scroll down and tap "About Phone"
+3. Find "Build Number" field
+4. Tap "Build Number" 7 times rapidly
+   (You'll see a countdown: 6, 5, 4, 3, 2, 1, "Developer Mode Enabled")
+5. Go back to Settings main screen
+
+✓ Developer Options should now appear in Settings menu
+
+STEP 2️⃣ : Enable USB Debugging
+───────────────────────────────
+
+1. Go back to Settings
+2. Scroll down - you should now see "Developer Options"
+3. Tap "Developer Options"
+4. Find "USB Debugging" in the list
+5. Toggle it ON (should turn blue/green)
+6. A dialog will appear asking "Allow USB debugging?"
+7. Tap "OK" to confirm
+
+✓ USB Debugging is now ENABLED
+
+STEP 3️⃣ : Connect Phone to Computer
+─────────────────────────────────────
+
+1. Take your USB cable
+2. Plug one end into your phone
+3. Plug other end into your computer
+4. A notification will appear on your phone
+5. Tap "Allow" when prompted for USB debugging permission
+   (This might appear multiple times - tap "Always allow" if available)
+
+✓ Phone is now connected and recognized
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 2: INSTALL APK (3 MINUTES)
+═════════════════════════════════════════════════════════════════════════════
+
+OPTION A: AUTOMATIC INSTALLATION ⭐ (RECOMMENDED)
+──────────────────────────────────────────────
+
+STEP 1️⃣ : Open File Explorer
+──────────────
+
+1. Open Windows File Explorer
+2. Navigate to this folder:
+   C:\Users\Admin\Downloads\gokul-stores
+
+STEP 2️⃣ : Run Installation Script
+────────────────────────────────
+
+1. In that folder, you should see: install-apk.bat
+2. Double-click on install-apk.bat
+3. A Command Prompt window will open
+4. Wait for it to complete...
+
+Expected output should show:
+   Success
+
+5. When done, the window might close automatically
+   (or you can close it manually)
+
+✓ APK Installation Complete!
+
+───────────────────────────────────────────────────────────────────────────
+
+OPTION B: MANUAL COMMAND LINE INSTALLATION
+──────────────────────────────────────
+
+If the above doesn't work, try this:
+
+STEP 1️⃣ : Open Command Prompt or PowerShell
+──────────────────────────────────
+
+1. Press Windows Key + R
+2. Type: cmd (or powershell)
+3. Press Enter
+
+STEP 2️⃣ : Run Installation Command
+─────────────────────────────────
+
+Type this command and press Enter:
+
+   adb install -r C:\Users\Admin\Downloads\gokul-stores\dist-apk\gokul-stores-debug.apk
+
+Wait for it to complete. You should see:
+   Success
+
+✓ APK Installation Complete!
+
+───────────────────────────────────────────────────────────────────────────
+
+OPTION C: ANDROID STUDIO INSTALLATION
+────────────────────────────────
+
+If you have Android Studio installed:
+
+1. Open Android Studio
+2. Click File → Open → Select android/ folder
+3. Wait for project to load
+4. Connect your phone
+5. Click Run (green play button)
+6. Select your device from the list
+7. Wait for app to build and install
+
+✓ APK Installation Complete!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PHASE 3: LAUNCH APP (1 MINUTE)
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 1️⃣ : Find the App
+──────────────────────
+
+1. On your phone, open the app drawer (swipe up from bottom)
+2. Look for "Gokul Stores" icon
+3. It should be there now
+
+STEP 2️⃣ : Launch the App
+─────────────────────────
+
+1. Tap the "Gokul Stores" icon
+2. App will start loading
+3. You'll see the splash screen
+4. Welcome screen will appear
+
+✓ App is running!
+
+STEP 3️⃣ : Sign In or Create Account
+─────────────────────────────────────
+
+Option 1: Sign In with Email
+   1. Enter your email
+   2. Enter your password
+   3. Tap "Sign In"
+
+Option 2: Create New Account
+   1. Tap "Sign Up"
+   2. Enter your name
+   3. Enter email
+   4. Enter password
+   5. Confirm password
+   6. Tap "Create Account"
+
+Option 3: Sign In with Google
+   1. Tap "Google Account"
+   2. Select your Google account
+   3. Grant permissions
+   4. Done!
+
+✓ You're logged in!
+
+STEP 4️⃣ : Start Shopping!
+──────────────────────────
+
+1. Tap "Home" to see products
+2. Browse categories:
+   - 🍪 Snacks
+   - 🥤 Juice
+   - 🥬 Vegetables
+   - 🛒 Groceries
+
+3. Add items to cart
+4. View your profile
+5. Check order history
+6. Save to wishlist
+7. Leave reviews
+
+✓ Enjoy shopping!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ TROUBLESHOOTING
+═════════════════════════════════════════════════════════════════════════════
+
+Problem: "Developer Options not showing"
+────────────────────────────────────────
+Solution:
+   1. Go to About Phone
+   2. Look for "Build Number" - might be at the bottom
+   3. Tap it 7 times quickly
+   4. You should see message: "You are now a developer"
+   5. Go back - Developer Options should appear
+
+Problem: "USB Debugging permission request not appearing"
+──────────────────────────────────────────────────────────
+Solution:
+   1. Disconnect phone
+   2. Reconnect phone
+   3. Look carefully at phone screen for permission prompt
+   4. Tap "Allow" or "Always Allow"
+
+Problem: "Device not detected by computer"
+───────────────────────────────────────────
+Solution:
+   1. Try different USB port on computer
+   2. Try different USB cable
+   3. Restart phone
+   4. Restart computer
+   5. Update USB drivers
+   6. Run: adb devices (to check if device appears)
+
+Problem: "Installation fails"
+─────────────────────────────
+Solution:
+   1. First uninstall old version:
+      adb uninstall com.gokul.stores
+   2. Then reinstall:
+      adb install -r dist-apk/gokul-stores-debug.apk
+   3. If still fails, restart phone and try again
+
+Problem: "App crashes on startup"
+──────────────────────────────────
+Solution:
+   1. Check internet connection
+   2. Clear app cache:
+      Settings → Apps → Gokul Stores → Storage → Clear Cache
+   3. Uninstall and reinstall the app
+   4. Check if Google Play Services is installed
+
+Problem: "Can't find install-apk.bat"
+──────────────────────────────────────
+Solution:
+   1. Make sure you're in correct folder:
+      C:\Users\Admin\Downloads\gokul-stores
+   2. View hidden files if needed
+   3. Check file extensions are visible
+   4. Use Option B (Manual Command Line) instead
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ QUICK CHECKLIST
+═════════════════════════════════════════════════════════════════════════════
+
+Before Installation:
+   [ ] Developer Options enabled on phone
+   [ ] USB Debugging enabled on phone
+   [ ] Phone connected with USB cable
+   [ ] USB debugging permission granted
+
+During Installation:
+   [ ] install-apk.bat ran successfully (or adb command)
+   [ ] "Success" message appeared
+   [ ] No errors shown
+
+After Installation:
+   [ ] "Gokul Stores" appears in app drawer
+   [ ] App launches successfully
+   [ ] Can sign in or create account
+   [ ] Can see products and features
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📞 SUPPORT
+═════════════════════════════════════════════════════════════════════════════
+
+If you encounter issues:
+   1. Check TROUBLESHOOTING section above
+   2. Try different installation method
+   3. Read DEPLOYMENT_READY.txt for more help
+   4. Review INSTALLATION_REFERENCE.md
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 READY TO INSTALL!
+═════════════════════════════════════════════════════════════════════════════
+
+Your APK is at:
+   C:\Users\Admin\Downloads\gokul-stores\dist-apk\gokul-stores-debug.apk
+
+Installation method ready:
+   ✓ install-apk.bat (automatic)
+   OR
+   ✓ adb install command (manual)
+   OR
+   ✓ Android Studio (IDE)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    🚀 FOLLOW THE STEPS ABOVE TO INSTALL
+
+                    TOTAL TIME: ~5 MINUTES
+
+═════════════════════════════════════════════════════════════════════════════════
+
+Last Updated: April 9, 2026
+Status: READY FOR INSTALLATION ✅
+
+
